@@ -49,7 +49,7 @@ fn test_additional_examples_1() {
     }
 
     assert_eq!(templates[0].build(), "/person");
-    let template_1_answers = vec![
+    let template_1_answers = [
         "/person?fields=id,name,picture&first_name=John&last.name=Doe&token=12345",
         "/person?fields=id,picture,name&first_name=John&last.name=Doe&token=12345",
         "/person?fields=picture,name,id&first_name=John&last.name=Doe&token=12345",
@@ -58,7 +58,7 @@ fn test_additional_examples_1() {
         "/person?fields=name,id,picture&first_name=John&last.name=Doe&token=12345",
     ];
     assert!(template_1_answers.contains(&templates[1].build().as_ref()));
-    let template_2_answers = vec![
+    let template_2_answers = [
         "/search.json?q=URI%20Templates&geocode=37.76,-122.427&lang=en&page=5",
         "/search.json?q=URI%20Templates&geocode=-122.427,37.76&lang=en&page=5",
     ];
@@ -104,9 +104,9 @@ fn test_additional_examples_2() {
         template.set("id", &["person", "albums"] as &[&str]);
     }
 
-    let template_0_answers = vec!["/person/albums", "/albums/person"];
+    let template_0_answers = ["/person/albums", "/albums/person"];
     assert!(template_0_answers.contains(&templates[0].build().as_ref()));
-    let template_1_answers = vec![
+    let template_1_answers = [
         "/person/albums?fields=id,name,picture&token=12345",
         "/person/albums?fields=id,picture,name&token=12345",
         "/person/albums?fields=picture,name,id&token=12345",
@@ -140,17 +140,17 @@ fn test_additional_examples_3() {
         template.set("empty_list", &[] as &[&str]);
     }
 
-    let template_0_answers = vec![""];
+    let template_0_answers = [""];
     assert!(template_0_answers.contains(&templates[0].build().as_ref()));
-    let template_1_answers = vec![""];
+    let template_1_answers = [""];
     assert!(template_1_answers.contains(&templates[1].build().as_ref()));
-    let template_2_answers = vec![""];
+    let template_2_answers = [""];
     assert!(template_2_answers.contains(&templates[2].build().as_ref()));
-    let template_3_answers = vec![""];
+    let template_3_answers = [""];
     assert!(template_3_answers.contains(&templates[3].build().as_ref()));
-    let template_4_answers = vec![""];
+    let template_4_answers = [""];
     assert!(template_4_answers.contains(&templates[4].build().as_ref()));
-    let template_5_answers = vec![""];
+    let template_5_answers = [""];
     assert!(template_5_answers.contains(&templates[5].build().as_ref()));
 }
 
@@ -184,6 +184,6 @@ fn test_additional_examples_4() {
         templates[3].build(),
         "?1337=leet&1337=as&1337=it&1337=can&1337=be"
     );
-    let template_4_answers = vec!["?11=elf&12=zw%C3%B6lf", "?12=zw%C3%B6lf&11=elf"];
+    let template_4_answers = ["?11=elf&12=zw%C3%B6lf", "?12=zw%C3%B6lf&11=elf"];
     assert!(template_4_answers.contains(&templates[4].build().as_ref()));
 }

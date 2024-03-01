@@ -108,7 +108,7 @@ fn test_322_simple_string_expansion() {
     assert_eq!(templates[11].build(), "value");
     assert_eq!(templates[12].build(), "red,green,blue");
     assert_eq!(templates[13].build(), "red,green,blue");
-    let template_14_answers = vec![
+    let template_14_answers = [
         "comma,%2C,dot,.,semi,%3B",
         "comma,%2C,semi,%3B,dot,.",
         "dot,.,comma,%2C,semi,%3B",
@@ -117,7 +117,7 @@ fn test_322_simple_string_expansion() {
         "semi,%3B,dot,.,comma,%2C",
     ];
     assert!(template_14_answers.contains(&templates[14].build().as_ref()));
-    let template_15_answers = vec![
+    let template_15_answers = [
         "comma=%2C,dot=.,semi=%3B",
         "comma=%2C,semi=%3B,dot=.",
         "dot=.,comma=%2C,semi=%3B",
@@ -195,7 +195,7 @@ fn test_323_reserved_expansion() {
     assert_eq!(templates[14].build(), "/foo/bar,1024/here");
     assert_eq!(templates[15].build(), "red,green,blue");
     assert_eq!(templates[16].build(), "red,green,blue");
-    let template_17_answers = vec![
+    let template_17_answers = [
         "comma,,,dot,.,semi,;",
         "comma,,,semi,;,dot,.",
         "dot,.,comma,,,semi,;",
@@ -204,7 +204,7 @@ fn test_323_reserved_expansion() {
         "semi,;,dot,.,comma,,",
     ];
     assert!(template_17_answers.contains(&templates[17].build().as_ref()));
-    let template_18_answers = vec![
+    let template_18_answers = [
         "comma=,,dot=.,semi=;",
         "comma=,,semi=;,dot=.",
         "dot=.,comma=,,semi=;",
@@ -264,7 +264,7 @@ fn test_324_fragment_expansion() {
     assert_eq!(templates[7].build(), "#/foo/b/here");
     assert_eq!(templates[8].build(), "#red,green,blue");
     assert_eq!(templates[9].build(), "#red,green,blue");
-    let template_10_answers = vec![
+    let template_10_answers = [
         "#comma,,,dot,.,semi,;",
         "#comma,,,semi,;,dot,.",
         "#dot,.,comma,,,semi,;",
@@ -327,7 +327,7 @@ fn test_325_label_expansion_with_dot_prefix() {
     assert_eq!(templates[7].build(), "X");
     assert_eq!(templates[8].build(), "X.red,green,blue");
     assert_eq!(templates[9].build(), "X.red.green.blue");
-    let template_10_answers = vec![
+    let template_10_answers = [
         "#comma,,,dot,.,semi,;",
         "#comma,,,semi,;,dot,.",
         "#dot,.,comma,,,semi,;",
@@ -336,7 +336,7 @@ fn test_325_label_expansion_with_dot_prefix() {
         "#semi,;,dot,.,comma,,",
     ];
     assert!(template_10_answers.contains(&templates[10].build().as_ref()));
-    let template_11_answers = vec![
+    let template_11_answers = [
         "#comma=,,dot=.,semi=;",
         "#comma=,,semi=;,dot=.",
         "#dot=.,comma=,,semi=;",
@@ -403,7 +403,7 @@ fn test_326_path_segment_expansion() {
     assert_eq!(templates[9].build(), "/red,green,blue");
     assert_eq!(templates[10].build(), "/red/green/blue");
     assert_eq!(templates[11].build(), "/red/green/blue/%2Ffoo");
-    let template_12_answers = vec![
+    let template_12_answers = [
         "/comma,%2C,dot,.,semi,%3B",
         "/comma,%2C,semi,%3B,dot,.",
         "/dot,.,comma,%2C,semi,%3B",
@@ -412,7 +412,7 @@ fn test_326_path_segment_expansion() {
         "/semi,%3B,dot,.,comma,%2C",
     ];
     assert!(template_12_answers.contains(&templates[12].build().as_ref()));
-    let template_13_answers = vec![
+    let template_13_answers = [
         "/comma=%2C/dot=./semi=%3B",
         "/comma=%2C/semi=%3B/dot=.",
         "/dot=./comma=%2C/semi=%3B",
@@ -475,7 +475,7 @@ fn test_327_path_style_parameter_expansion() {
     assert_eq!(templates[8].build(), ";x=1024;y=768");
     assert_eq!(templates[9].build(), ";list=red,green,blue");
     assert_eq!(templates[10].build(), ";list=red;list=green;list=blue");
-    let template_11_answers = vec![
+    let template_11_answers = [
         ";keys=comma,%2C,dot,.,semi,%3B",
         ";keys=comma,%2C,semi,%3B,dot,.",
         ";keys=dot,.,comma,%2C,semi,%3B",
@@ -484,7 +484,7 @@ fn test_327_path_style_parameter_expansion() {
         ";keys=semi,%3B,dot,.,comma,%2C",
     ];
     assert!(template_11_answers.contains(&templates[11].build().as_ref()));
-    let template_12_answers = vec![
+    let template_12_answers = [
         ";comma=%2C;dot=.;semi=%3B",
         ";comma=%2C;semi=%3B;dot=.",
         ";dot=.;comma=%2C;semi=%3B",
@@ -541,7 +541,7 @@ fn test_328_form_style_query_expansion() {
     assert_eq!(templates[5].build(), "?var=val");
     assert_eq!(templates[6].build(), "?list=red,green,blue");
     assert_eq!(templates[7].build(), "?list=red&list=green&list=blue");
-    let template_8_answers = vec![
+    let template_8_answers = [
         "?keys=comma,%2C,dot,.,semi,%3B",
         "?keys=comma,%2C,semi,%3B,dot,.",
         "?keys=dot,.,comma,%2C,semi,%3B",
@@ -550,7 +550,7 @@ fn test_328_form_style_query_expansion() {
         "?keys=semi,%3B,dot,.,comma,%2C",
     ];
     assert!(template_8_answers.contains(&templates[8].build().as_ref()));
-    let template_9_answers = vec![
+    let template_9_answers = [
         "?comma=%2C&dot=.&semi=%3B",
         "?comma=%2C&semi=%3B&dot=.",
         "?dot=.&comma=%2C&semi=%3B",
@@ -607,7 +607,7 @@ fn test_329_form_style_query_continuation() {
     assert_eq!(templates[5].build(), "&x=1024&y=768");
     assert_eq!(templates[6].build(), "&list=red,green,blue");
     assert_eq!(templates[7].build(), "&list=red&list=green&list=blue");
-    let template_8_answers = vec![
+    let template_8_answers = [
         "&keys=comma,%2C,dot,.,semi,%3B",
         "&keys=comma,%2C,semi,%3B,dot,.",
         "&keys=dot,.,comma,%2C,semi,%3B",
@@ -616,7 +616,7 @@ fn test_329_form_style_query_continuation() {
         "&keys=semi,%3B,dot,.,comma,%2C",
     ];
     assert!(template_8_answers.contains(&templates[8].build().as_ref()));
-    let template_9_answers = vec![
+    let template_9_answers = [
         "&comma=%2C&dot=.&semi=%3B",
         "&comma=%2C&semi=%3B&dot=.",
         "&dot=.&comma=%2C&semi=%3B",

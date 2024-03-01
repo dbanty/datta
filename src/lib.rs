@@ -360,9 +360,7 @@ impl UriTemplate {
                         }
                         let pairs: Vec<String> = a
                             .iter()
-                            .map(|&(ref k, ref v)| {
-                                format!("{},{}", &encode_reserved(k), &encoder(v))
-                            })
+                            .map(|(k, v)| format!("{},{}", &encode_reserved(k), &encoder(v)))
                             .collect();
                         res.push_str(&pairs.join(","));
                     }
@@ -370,7 +368,7 @@ impl UriTemplate {
                         if named {
                             let pairs: Vec<String> = a
                                 .iter()
-                                .map(|&(ref k, ref v)| {
+                                .map(|(k, v)| {
                                     let val: String = if v.is_empty() {
                                         format!("{}{}", &encode_reserved(k), ifemp)
                                     } else {
@@ -383,9 +381,7 @@ impl UriTemplate {
                         } else {
                             let pairs: Vec<String> = a
                                 .iter()
-                                .map(|&(ref k, ref v)| {
-                                    format!("{}={}", &encode_reserved(k), &encoder(v))
-                                })
+                                .map(|(k, v)| format!("{}={}", &encode_reserved(k), &encoder(v)))
                                 .collect();
                             res.push_str(&pairs.join(sep));
                         }
