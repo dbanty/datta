@@ -1,9 +1,9 @@
 [package]
 name = "datta"
-version = "0.1.0"
+version = "0.1.1"
 description = """Rust implementation of RFC6570 - URI Template that can process\
  URI Templates up and to including ones designated Level 4."""
-repository = "https://github.com/sifis-home/datta"
+repository = "https://github.com/wot-rust/datta"
 readme = "README.md"
 keywords = [
   "uritemplates",
@@ -16,4 +16,4 @@ license = "BSD-3-Clause"
 edition = "2021"
 
 [dependencies]
-regex = "1.6.0"
+regex = "1.10.0"
