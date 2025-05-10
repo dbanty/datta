@@ -1,8 +1,6 @@
 // This module provides support for URL percent encoding as defined in the
 // RFC 6570 specification.
 
-use regex::Regex;
-
 static UNRESERVED: [&str; 256] = [
     "%00", "%01", "%02", "%03", "%04", "%05", "%06", "%07", "%08", "%09", "%0A", "%0B", "%0C",
     "%0D", "%0E", "%0F", "%10", "%11", "%12", "%13", "%14", "%15", "%16", "%17", "%18", "%19",
@@ -55,13 +53,26 @@ pub fn encode_unreserved(s: &str) -> String {
 
 pub fn encode_reserved(s: &str) -> String {
     let mut res = String::new();
-    for &byte in s.as_bytes() {
+    let bytes = s.as_bytes();
+    let mut iter = bytes.iter().copied().enumerate();
+    while let Some((index, byte)) = iter.next() {
+        if byte == b'%' {
+            // This might be a pre-encoded octet, if so we need to keep it as-is, not re-encode
+            let next_two = (bytes.get(index + 1), bytes.get(index + 2));
+            if let (Some(&first), Some(&second)) = next_two {
+                if first.is_ascii_hexdigit() && second.is_ascii_hexdigit() {
+                    res.push(byte as char);
+                    res.push(first as char);
+                    res.push(second as char);
+                    // skip the two we just pushed
+                    iter.next();
+                    iter.next();
+                    continue;
+                }
+            }
+        }
         res.push_str(RESERVED[byte as usize]);
     }
-    // Correct any percent-encoded triplets whose percent signs were reencoded
-    Regex::new("%25(?P<hex>[0-9a-fA-F][0-9a-fA-F])")
-        .unwrap()
-        .replace_all(&res, "%$hex")
-        // FIXME
-        .to_string()
+
+    res
 }
